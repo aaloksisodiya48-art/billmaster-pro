@@ -1,4 +1,4 @@
-name: Deploy BillMaster Pro to GitHub Pages
+name: Deploy DREADVERDICTX and BillMaster Pro to GitHub Pages
 on:
   push:
     branches: [main]
@@ -25,6 +25,9 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: .
+          name: pages-${{ github.run_id }}-${{ github.run_attempt }}
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: pages-${{ github.run_id }}-${{ github.run_attempt }}
