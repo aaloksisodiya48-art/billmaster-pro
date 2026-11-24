@@ -1,27 +1,25 @@
 # DukaanLink cloud backend setup
 
-DukaanLink currently runs as a static GitHub Pages app. GitHub Pages cannot run a private API server or database. This folder prepares a Supabase-hosted PostgreSQL backend with Supabase Auth and Row Level Security.
+The dashboard now includes Supabase email/password authentication and an explicit first-time upload/download choice. After choosing one, it syncs shop profile, products, orders and expenses to the signed-in account.
 
-## What is ready
-- `schema.sql`: tables for shop profiles, products, orders and expenses.
-- Every row is scoped to its authenticated owner using RLS policies.
-- Constraints validate prices, quantities and allowed order/payment statuses.
-- The current app is still local-browser storage until its frontend is connected to a real Supabase project. Do not assume cloud sync is active yet.
+## One-time Supabase setup (required)
+1. In your Supabase project, open **SQL Editor → New query**.
+2. Open this repository file: `dukaanlink/supabase/schema.sql`. Copy the entire file into the SQL Editor and click **Run**.
+3. In **Authentication → Providers**, enable **Email** sign-in.
+4. In **Authentication → URL Configuration**, set the Site URL to:
+   `https://aaloksisodiya48-art.github.io/billmaster-pro/dukaanlink/`
+   Add that same URL to the allowed redirect URLs if required.
+5. If email confirmation is enabled, confirm the signup email before signing in.
 
-## Create the hosted backend
-1. Open https://supabase.com/ and create a project.
-2. Save the database password somewhere private. Do not paste it into chat or commit it to GitHub.
-3. In the Supabase project, open **SQL Editor → New query**.
-4. Copy all contents of `schema.sql`, paste them into the editor, and click **Run**.
-5. Open **Project Settings → API** (or **Data API**) and copy the Project URL and the publishable/anon key.
-6. Keep the project URL and publishable/anon key available for the frontend connection step. Never use or share the `service_role` key in browser code.
+## Frontend key safety
+- `dukaanlink/config.js` contains the Project URL and Supabase publishable key. Publishable keys are intended for browser apps.
+- Never put a database password, `service_role`, or secret key in frontend code or GitHub.
+- Row Level Security (RLS) is enabled by the schema. Keep it enabled; the policies restrict every row to its authenticated owner.
 
-## Before using real customer data
-- Enable email/password sign-in in Authentication → Providers.
-- Configure the allowed redirect/site URL to the deployed DukaanLink URL.
-- Keep email confirmation enabled if you want verified accounts.
-- Test with two separate accounts and confirm each account can only see its own rows.
-- Do not disable RLS. Do not add public read/write policies to the owner tables.
+## First login and migration
+1. Open the DukaanLink dashboard and go to **Shop profile → Cloud backup & sync**.
+2. Create an account or sign in.
+3. Choose **Upload this device's data** to migrate the current browser's local data to your cloud account, or **Load cloud data here** to use data already in Supabase.
+4. The selected action enables automatic sync on that device. Sign in and choose the action on each additional device.
 
-## Current limitations
-The SQL creates the hosted database structure, but it does not provision a Supabase project or connect the current dashboard automatically. A project URL and publishable/anon key are required for that next integration step. Existing localStorage data will need an explicit import/migration flow; it is not automatically uploaded.
+**Important:** Export a backup before migration. Upload replaces the cloud records for that account; download replaces local browser data. The customer storefront still uses a shareable catalogue snapshot link, and WhatsApp orders are not automatically inserted into the dashboard.
