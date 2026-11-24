@@ -64,6 +64,98 @@ body{background:radial-gradient(ellipse at 78% -12%,#401522 0,transparent 36%),r
 @keyframes introRise{from{opacity:0;transform:translateY(18px) scale(.96);filter:blur(7px)}to{opacity:1;transform:none;filter:none}}
 @keyframes loadIn{to{transform:scaleX(1)}}
 @media(prefers-reduced-motion:reduce){#intro:before,#intro:after,.intro-emblem:before,.intro-core,.intro-load i{animation:none!important}.intro-load i{transform:scaleX(1)}}
+
+/* BUILD 005 — Android / small-screen fit and touch polish */
+html{width:100%;min-height:100%;overflow-x:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{width:100%;max-width:100%;overflow-x:hidden;min-height:100dvh;padding-bottom:env(safe-area-inset-bottom)}
+.layout,.main,.content,.screen{min-width:0;max-width:100%}
+button,.btn,.install-btn,.nav button{min-height:40px;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+input,textarea,select{font-size:16px!important}
+.hero h1,.sectionhead h2,.tile b,.panel h3{overflow-wrap:anywhere}
+.hero p,.tile p,.desc,.muted{overflow-wrap:anywhere}
+.content{width:100%}
+@media(max-width:900px){
+ .layout{display:block;min-height:100dvh}
+ .side{position:sticky;top:0;width:100%;height:auto;min-height:0;padding:10px 14px 8px;overflow:visible;border-right:0;border-bottom:1px solid var(--line);z-index:20}
+ .sidehead{display:flex;align-items:center;justify-content:space-between;margin:0 0 8px}
+ .sidehead .logo{font-size:clamp(16px,4vw,21px)}
+ .sidehead .tagline{display:none}
+ .sidehead .avatar{width:32px;height:32px;flex:0 0 32px}
+ .profile,.sidefoot{display:none}
+ .nav{display:flex;flex:initial;width:100%;min-height:0;max-height:none;overflow-x:auto;overflow-y:hidden;gap:6px;padding:0 0 3px;scrollbar-width:none;overscroll-behavior-x:contain}
+ .nav::-webkit-scrollbar{display:none}
+ .nav button{flex:0 0 auto;white-space:nowrap;padding:9px 12px;font-size:11px}
+ .nav button .ico{display:inline;width:auto}
+ .top{height:52px;padding:0 16px}
+ .content{padding:20px 16px calc(28px + env(safe-area-inset-bottom))}
+ .dashboard-lower{grid-template-columns:1fr}
+ .workflow-steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:620px){
+ .side{padding:9px 11px 7px}
+ .sidehead{margin-bottom:7px}
+ .nav button{min-height:38px;padding:8px 10px;font-size:10px;border-radius:8px}
+ .top{height:48px;padding:0 12px;gap:8px}
+ .crumb{font-size:9px;letter-spacing:.7px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ .topright{gap:6px;min-width:0}
+ .live{padding:6px 7px;font-size:8px;white-space:nowrap}
+ .install-btn{padding:7px 8px;font-size:9px;white-space:nowrap;min-height:34px}
+ .topright>.avatar{display:none}
+ .content{padding:14px 12px calc(24px + env(safe-area-inset-bottom))}
+ .hero{padding:19px 16px;border-radius:15px}
+ .hero h1{font-size:clamp(25px,7vw,34px);letter-spacing:-1.2px}
+ .hero p{font-size:12px;line-height:1.65}
+ .hero:after{font-size:72px;right:10px;top:-8px}
+ .herofoot{gap:8px}
+ .herofoot .btn{flex:1 1 145px}
+ .stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0 20px}
+ .stat{padding:12px 10px;min-width:0}
+ .stat small{font-size:8px;letter-spacing:.6px}
+ .stat strong{font-size:22px}
+ .cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .tile{min-width:0;min-height:145px;padding:12px;border-radius:12px}
+ .tile .symbol{font-size:20px;margin-bottom:10px}
+ .tile b{font-size:12px}
+ .tile p{font-size:10px;line-height:1.45}
+ .tile .btn{width:100%;padding:9px 7px;font-size:9px}
+ .sectionhead{align-items:flex-start;flex-wrap:wrap;margin:20px 0 11px}
+ .sectionhead h2{font-size:18px}
+ .sectionhead p{font-size:10px;line-height:1.5}
+ .sectionhead>.btn,.sectionhead>.tag{max-width:100%}
+ .two{grid-template-columns:minmax(0,1fr);gap:9px}
+ .panel{min-width:0;padding:13px;border-radius:12px}
+ .formrow{grid-template-columns:minmax(0,1fr);gap:9px}
+ .field input,.field textarea,.field select{min-width:0;padding:12px}
+ .field textarea{min-height:105px}
+ .entry{min-width:0;align-items:flex-start;padding:10px;gap:8px}
+ .entry>div,.entry>span{min-width:0;overflow-wrap:anywhere}
+ .entry b{font-size:11px;overflow-wrap:anywhere}
+ .entry button{flex:0 0 auto;padding:8px;font-size:9px}
+ .calendar{grid-template-columns:repeat(7,minmax(0,1fr));gap:3px}
+ .day{min-width:0;min-height:51px;padding:5px 3px;font-size:9px;overflow:hidden}
+ .day small{font-size:7px;overflow-wrap:anywhere}
+ .workflow-steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+ .workflow-step{min-width:0;padding:9px}
+ .slidefoot{font-size:8px;gap:8px;flex-wrap:wrap}
+ .toast{left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));text-align:center}
+}
+@media(max-width:360px){
+ .cards{grid-template-columns:minmax(0,1fr)}
+ .tile{min-height:0}
+ .live{display:none}
+ .herofoot .btn{flex-basis:100%}
+ .calendar .day{min-height:45px}
+}
+@media(orientation:landscape) and (max-height:500px) and (max-width:900px){
+ .side{position:relative}
+ .nav{max-height:44px}
+ .content{padding-top:12px}
+ #intro{min-height:100dvh}
+ .intro-emblem{width:76px;height:76px;margin-bottom:14px}
+ .intro-emblem svg{width:58px;height:58px}
+ .intro-sub{margin:8px 0 15px}
+}
+
 </style></head><body><div id="intro" aria-label="DreadVerdictX loading"><div class="intro-grid"></div><div class="intro-core"><div class="intro-emblem"><svg viewBox="0 0 100 100" role="img" aria-label="DreadVerdictX emblem"><path d="M50 7 88 29v42L50 93 12 71V29Z" fill="#130d15" stroke="#ff4658" stroke-width="2.5"/><path d="M28 68V32h16c15 0 25 8 25 18S59 68 44 68H28Zm12-10h5c7 0 12-3 12-8s-5-8-12-8h-5v16Z" fill="#f5f1f3"/><path d="m66 30-7 40h10l7-40Z" fill="#ff4658"/><path d="M20 78h60" stroke="#ff4658" stroke-width="2" opacity=".8"/></svg></div><h1 class="intro-name">DREADVERDICT<span>X</span></h1><p class="intro-sub">CREATOR COMMAND SYSTEM</p><div class="intro-load"><i></i></div><div class="intro-status">INITIALIZING YOUR STUDIO</div></div></div><div class="layout">
 <aside class="side"><div class="sidehead"><div><div class="logo">DREADVERDICT<span>X</span></div><div class="tagline">CREATOR COMMAND SYSTEM</div></div><div class="avatar">A</div></div>
 <div class="profile"><small class="kicker">CREATOR ACCESS</small><b>Aalok Singh</b><span>● OWNER · MADE BY AALOK</span></div>
