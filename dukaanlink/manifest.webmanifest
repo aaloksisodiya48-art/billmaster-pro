@@ -1,0 +1,19 @@
+{
+  "name": "DukaanLink — Shop Manager",
+  "short_name": "DukaanLink",
+  "description": "Manage products, orders, stock and shop finances.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f4f6fa",
+  "theme_color": "#101827",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
