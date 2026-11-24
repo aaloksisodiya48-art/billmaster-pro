@@ -156,6 +156,14 @@ input,textarea,select{font-size:16px!important}
  .intro-sub{margin:8px 0 15px}
 }
 
+
+/* BUILD 006 — Gemini AI studio */
+#ai .panel{min-width:0}
+#ai .cards button{min-width:0;white-space:normal;line-height:1.35}
+#ai textarea{font-family:var(--font);font-size:13px!important}
+#geminiGenerate:disabled{opacity:.65;cursor:wait;transform:none}
+#geminiOutput{white-space:pre-wrap}
+
 </style></head><body><div id="intro" aria-label="DreadVerdictX loading"><div class="intro-grid"></div><div class="intro-core"><div class="intro-emblem"><svg viewBox="0 0 100 100" role="img" aria-label="DreadVerdictX emblem"><path d="M50 7 88 29v42L50 93 12 71V29Z" fill="#130d15" stroke="#ff4658" stroke-width="2.5"/><path d="M28 68V32h16c15 0 25 8 25 18S59 68 44 68H28Zm12-10h5c7 0 12-3 12-8s-5-8-12-8h-5v16Z" fill="#f5f1f3"/><path d="m66 30-7 40h10l7-40Z" fill="#ff4658"/><path d="M20 78h60" stroke="#ff4658" stroke-width="2" opacity=".8"/></svg></div><h1 class="intro-name">DREADVERDICT<span>X</span></h1><p class="intro-sub">CREATOR COMMAND SYSTEM</p><div class="intro-load"><i></i></div><div class="intro-status">INITIALIZING YOUR STUDIO</div></div></div><div class="layout">
 <aside class="side"><div class="sidehead"><div><div class="logo">DREADVERDICT<span>X</span></div><div class="tagline">CREATOR COMMAND SYSTEM</div></div><div class="avatar">A</div></div>
 <div class="profile"><small class="kicker">CREATOR ACCESS</small><b>Aalok Singh</b><span>● OWNER · MADE BY AALOK</span></div>
@@ -163,6 +171,7 @@ input,textarea,select{font-size:16px!important}
 <button class="active" data-screen="command"><span class="ico">⌂</span>Command</button>
 <button data-screen="ideas"><span class="ico">✳</span>Idea Lab</button>
 <button data-screen="hookforge"><span class="ico">⚡</span>Hook Forge</button>
+<button data-screen="ai"><span class="ico">✦</span>Gemini AI</button>
 <button data-screen="bible"><span class="ico">◉</span>Series Bible</button>
 <button data-screen="scripts"><span class="ico">▤</span>Script Room</button>
 <button data-screen="production"><span class="ico">◈</span>Production</button>
@@ -201,6 +210,40 @@ input,textarea,select{font-size:16px!important}
 <div class="tile"><div class="symbol">▶</div><b>Channel</b><p>Visit the public channel to review the viewer experience.</p><button class="btn subtle" onclick="toast('Add your channel URL in Creator Vault settings when ready.')">Set channel link</button></div>
 </div><div class="panel" style="margin-top:13px"><h3>Daily production checklist</h3><p class="desc">A repeatable flow for one short a day. Check items as you complete them.</p><div id="checklist" class="list" style="margin-top:12px"></div></div></section>
 <section class="screen" id="vault"><div class="sectionhead"><div><div class="kicker">08 / PERSONAL WORKSPACE</div><h2>Creator Vault</h2><p>Personal settings, local backup and your creator identity.</p></div><span class="tag">PRIVATE SPACE</span></div><div class="two"><div class="panel"><h3>Creator identity</h3><form id="profileForm" class="form" style="margin-top:14px"><div class="field"><label>CREATOR NAME</label><input name="name" value="Aalok Singh"></div><div class="field"><label>CHANNEL NAME</label><input name="channel" value="DreadVerdict"></div><div class="field"><label>CHANNEL URL</label><input name="url" placeholder="Paste your YouTube channel link"></div><div class="field"><label>CREATOR NOTE</label><textarea name="note" placeholder="Your goals, niche, upload rhythm..."></textarea></div><button class="btn">Save identity</button></form></div><div class="panel"><h3>Your data, your control</h3><p class="desc">This version stores your workspace on this device. Export a backup before switching devices.</p><div class="list" style="margin-top:14px"><button class="btn ghost" onclick="exportData()">↓ Export all workspace data</button><label class="btn subtle" style="text-align:center">↑ Import backup<input type="file" accept="application/json" hidden onchange="importData(event)"></label><button class="btn danger" onclick="resetData()">Reset local workspace</button></div><p class="muted">No YouTube account access is assumed. Publishing and analytics integrations require separate authorised connections.</p></div></div></section>
+
+<section class="screen" id="ai">
+ <div class="sectionhead"><div><div class="kicker">AI / CREATOR INTELLIGENCE</div><h2>Gemini AI Studio</h2><p>Your DreadVerdict creative partner. Generate, refine and save content.</p></div><span class="tag">GEMINI API</span></div>
+ <div class="two">
+  <div class="panel">
+   <div class="kicker">01 / CONNECTION</div><h3 style="margin:8px 0">Connect your Gemini key</h3>
+   <p class="desc">Paste your Google AI Studio API key. It stays in this browser on this device; it is not committed to GitHub.</p>
+   <div class="field" style="margin-top:12px"><label>GEMINI API KEY</label><input id="geminiKey" type="password" autocomplete="off" placeholder="Paste your Gemini API key"></div>
+   <div class="formrow" style="margin-top:9px"><div class="field"><label>MODEL</label><select id="geminiModel"><option value="gemini-2.5-flash">Gemini 2.5 Flash</option><option value="gemini-2.5-flash-lite">Gemini 2.5 Flash-Lite</option></select></div><div class="field"><label>KEY STATUS</label><input id="geminiStatus" value="Not connected" readonly></div></div>
+   <div class="herofoot"><button class="btn" type="button" onclick="saveGeminiKey()">Save key on this device</button><button class="btn ghost" type="button" onclick="clearGeminiKey()">Remove key</button></div>
+   <p class="muted" style="margin-top:10px">Security: anyone who can use this browser profile may be able to access a locally saved key. For a shared/public app, use a server-side proxy instead.</p>
+  </div>
+  <div class="panel">
+   <div class="kicker">02 / QUICK MISSIONS</div><h3 style="margin:8px 0">What should Gemini create?</h3>
+   <p class="desc">Pick a workflow to load a tailored prompt, then edit it before generating.</p>
+   <div class="cards" style="grid-template-columns:repeat(2,minmax(0,1fr));margin-top:13px">
+    <button class="btn subtle" type="button" onclick="setAIMission('ideas')">✳ Video ideas</button>
+    <button class="btn subtle" type="button" onclick="setAIMission('hooks')">⚡ Strong hooks</button>
+    <button class="btn subtle" type="button" onclick="setAIMission('script')">▤ Full Shorts script</button>
+    <button class="btn subtle" type="button" onclick="setAIMission('titles')">▧ Titles + thumbnail</button>
+    <button class="btn subtle" type="button" onclick="setAIMission('retention')">⌁ Retention rewrite</button>
+    <button class="btn subtle" type="button" onclick="setAIMission('custom')">＋ Custom request</button>
+   </div>
+  </div>
+ </div>
+ <div class="panel" style="margin-top:12px">
+  <div class="kicker">03 / PROMPT WORKSPACE</div><div class="field" style="margin-top:10px"><label>YOUR CREATIVE BRIEF</label><textarea id="aiPrompt" style="min-height:155px" placeholder="Example: Give me 5 original 45-second horror Shorts ideas with a powerful first 2-second hook and a twist ending."></textarea></div>
+  <div class="herofoot"><button class="btn" id="geminiGenerate" type="button" onclick="runGemini()">✦ Generate with Gemini</button><button class="btn ghost" type="button" onclick="clearAIOutput()">Clear result</button></div>
+  <div id="geminiProgress" class="muted" role="status" style="margin-top:12px">Ready when you are.</div>
+  <div class="field" style="margin-top:14px"><label>GEMINI OUTPUT</label><textarea id="geminiOutput" readonly style="min-height:280px;line-height:1.65" placeholder="Your generated result will appear here..."></textarea></div>
+  <div class="herofoot"><button class="btn subtle" type="button" onclick="copyAIOutput()">Copy result</button><button class="btn subtle" type="button" onclick="saveAIAsScript()">Save to Script Room</button></div>
+ </div>
+</section>
+
 <div class="slidefoot"><span>DREADVERDICTX / MADE BY AALOK</span><span id="footPage">01 — 11</span></div>
 </main></div></div><div class="toast" id="toast"></div>
 <script>
@@ -208,8 +251,8 @@ const KEY='dreadverdictx_workspace_v1';
 let db=(()=>{try{return JSON.parse(localStorage.getItem(KEY))||{ideas:[],scripts:[],projects:[],thumbs:[],releases:[],analytics:[],checks:[]}}catch(e){return {ideas:[],scripts:[],projects:[],thumbs:[],releases:[],analytics:[],checks:[]}}})();
 const $=id=>document.getElementById(id),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),save=()=>localStorage.setItem(KEY,JSON.stringify(db));
 function toast(s){let t=$('toast');t.textContent=s;t.style.display='block';clearTimeout(window._toast);window._toast=setTimeout(()=>t.style.display='none',2500)}
-const names=['command','ideas','hookforge','bible','scripts','production','thumbnails','calendar','analytics','automation','vault'];
-const labels=['COMMAND CENTRE','IDEA LAB','HOOK FORGE','SERIES BIBLE','SCRIPT ROOM','PRODUCTION BOARD','THUMBNAIL LAB','RELEASE CALENDAR','ANALYTICS DESK','AUTOMATION HUB','CREATOR VAULT'];
+const names=['command','ideas','hookforge','ai','bible','scripts','production','thumbnails','calendar','analytics','automation','vault'];
+const labels=['COMMAND CENTRE','IDEA LAB','HOOK FORGE','GEMINI AI STUDIO','SERIES BIBLE','SCRIPT ROOM','PRODUCTION BOARD','THUMBNAIL LAB','RELEASE CALENDAR','ANALYTICS DESK','AUTOMATION HUB','CREATOR VAULT'];
 function go(id){document.querySelectorAll('.screen').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x.dataset.screen===id));let i=names.indexOf(id);$('crumb').textContent=String(i+1).padStart(2,'0')+' / '+labels[i];$('footPage').textContent=String(i+1).padStart(2,'0')+' — 11';renderAll();window.scrollTo({top:0,behavior:'smooth'})}
 $('nav').addEventListener('click',e=>{let b=e.target.closest('[data-screen]');if(b)go(b.dataset.screen)});
 function formObj(form){return Object.fromEntries(new FormData(form).entries())}
@@ -250,6 +293,39 @@ function saveHook(h){db.ideas.unshift({title:'Hook: '+h.slice(0,58),format:'Shor
 $('bibleForm').onsubmit=e=>{e.preventDefault();db.bible.unshift({...formObj(e.target),date:new Date().toISOString()});e.target.reset();save();renderAll();toast('Series Bible entry saved')};
 const oldRenderAll=renderAll;
 renderAll=function(){oldRenderAll();$('bibleList').innerHTML=db.bible.length?db.bible.map((x,i)=>item(x.title,x.type+' · '+x.status+' · '+(x.details||'No details').slice(0,90),"removeFrom('bible',"+i+")")).join(''):'<div class="empty">Your series bible is empty. Add a character, location or world rule.</div>'};
+
+
+const GEMINI_KEY='dvx_gemini_api_key_v1';
+function saveGeminiKey(){const k=$('geminiKey').value.trim();if(!k){toast('Paste your Gemini API key first');return}localStorage.setItem(GEMINI_KEY,k);$('geminiStatus').value='Connected on this device';toast('Gemini key saved on this device')}
+function clearGeminiKey(){localStorage.removeItem(GEMINI_KEY);$('geminiKey').value='';$('geminiStatus').value='Not connected';toast('Gemini key removed from this device')}
+function setAIMission(kind){const p={
+ideas:'Create 10 original YouTube Shorts ideas for DreadVerdict. Focus on immersive horror, mystery, survival, psychological thriller and sci-fi. Each idea needs a clickable concept, 1-line hook, escalation and twist/payoff. Avoid generic ideas and explain why each could hold attention.',
+hooks:'Write 12 highly compelling opening hooks for a DreadVerdict YouTube Short. The first line must create immediate curiosity or danger in under 2 seconds. Use second-person immersion where suitable. Avoid clickbait that the story cannot pay off.',
+script:'Write a complete 45–60 second DreadVerdict YouTube Shorts script in natural English. Make the viewer the protagonist, use an immediate hook, escalating visual beats, concise voiceover, sound-design cues, a logical twist and a consequential viewer-choice ending. If this is for the GTA 6 series, explicitly mention GTA 6 naturally in the script.',
+titles:'Create 10 high-curiosity YouTube titles and 5 thumbnail concepts for this DreadVerdict video. Each thumbnail should have one focal subject, strong readable emotion, simple composition and a clear unanswered question. Avoid misleading promises.',
+retention:'Act as a professional Shorts retention editor. Rewrite the supplied script to improve the first 2 seconds, pacing, curiosity gaps, visual changes and payoff. Remove filler, preserve story logic and keep the final duration close to the original.',
+custom:'Act as the creative co-pilot for DreadVerdict. Help me with this request: '
+};$('aiPrompt').value=p[k]||p.custom;$('aiPrompt').focus()}
+function aiContext(){return 'You are the senior creative producer for DreadVerdict, an immersive short-form storytelling channel. Core genres: horror, mystery, survival, psychological thriller and sci-fi. Write scripts in natural, cinematic English unless asked otherwise. The viewer is often the protagonist. Prioritise original concepts, a powerful first 1–2 seconds, clear visual storytelling, escalating stakes, logical twists, sound-design opportunities and meaningful audience-choice endings. Avoid generic filler, fake claims and repetitive hooks. For any GTA 6 episodic-series script, explicitly include the words GTA 6 naturally in every script. Give practical, production-ready outputs.'}
+async function runGemini(){
+ const key=localStorage.getItem(GEMINI_KEY)||$('geminiKey').value.trim(),prompt=$('aiPrompt').value.trim(),model=$('geminiModel').value,btn=$('geminiGenerate');
+ if(!key){toast('Add and save your Gemini API key first');$('geminiKey').focus();return}
+ if(!prompt){toast('Write or choose a creative brief first');$('aiPrompt').focus();return}
+ btn.disabled=true;btn.textContent='Generating…';$('geminiProgress').textContent='Gemini is working on your request…';
+ try{
+  const res=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+encodeURIComponent(model)+':generateContent',{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':key},body:JSON.stringify({system_instruction:{parts:[{text:aiContext()}]},contents:[{role:'user',parts:[{text:prompt}]}],generationConfig:{temperature:0.9,maxOutputTokens:3500}})});
+  const data=await res.json();
+  if(!res.ok){const msg=data?.error?.message||('Gemini API error '+res.status);throw new Error(msg)}
+  const out=(data.candidates||[]).flatMap(c=>c.content?.parts||[]).map(p=>p.text||'').join('\n').trim();
+  if(!out)throw new Error('Gemini returned an empty response. Try again or choose another model.');
+  $('geminiOutput').value=out;$('geminiProgress').textContent='Generation complete · '+model;toast('Gemini created your content');
+ }catch(e){$('geminiProgress').textContent='Could not generate. Check the key, model access and internet connection.';$('geminiOutput').value='ERROR: '+e.message;toast('Gemini request failed — see the error below')}
+ finally{btn.disabled=false;btn.textContent='✦ Generate with Gemini'}
+}
+function copyAIOutput(){const v=$('geminiOutput').value;if(!v){toast('No result to copy yet');return}navigator.clipboard?.writeText(v).then(()=>toast('AI result copied')).catch(()=>toast('Clipboard unavailable'))}
+function clearAIOutput(){$('geminiOutput').value='';$('geminiProgress').textContent='Ready when you are.'}
+function saveAIAsScript(){const body=$('geminiOutput').value.trim();if(!body){toast('Generate something first');return}db.scripts.unshift({title:'Gemini draft · '+new Date().toLocaleDateString(),format:'Short',status:'AI draft',body,date:new Date().toISOString()});save();renderAll();toast('Saved to Script Room')}
+(function initGemini(){const k=localStorage.getItem(GEMINI_KEY);if(k){$('geminiKey').value=k;$('geminiStatus').value='Connected on this device'}})();
 
 renderAll();
 // Cinematic brand reveal on every fresh app launch.
