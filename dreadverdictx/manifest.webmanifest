@@ -1,1 +1,28 @@
-{"name":"DreadVerdictX — Creator Command","short_name":"DreadVerdictX","description":"A creator command system made by Aalok for the DreadVerdict channel.","start_url":"./","scope":"./","display":"standalone","background_color":"#090a10","theme_color":"#090a10","icons":[{"src":"./icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]}
+{
+  "name": "DreadVerdictX — Creator Command",
+  "short_name": "DreadVerdictX",
+  "description": "A creator command system made by Aalok for the DreadVerdict channel.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#090a10",
+  "theme_color": "#090a10",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "id": "./",
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "orientation": "any",
+  "categories": [
+    "productivity",
+    "utilities"
+  ]
+}
