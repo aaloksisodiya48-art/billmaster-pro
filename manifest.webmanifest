@@ -1,0 +1,11 @@
+{
+  "name":"BillMaster Pro",
+  "short_name":"BillMaster",
+  "start_url":"./",
+  "scope":"./",
+  "display":"standalone",
+  "background_color":"#f3f6fb",
+  "theme_color":"#172b4d",
+  "description":"GST and non-GST invoice maker",
+  "icons":[{"src":"./icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
