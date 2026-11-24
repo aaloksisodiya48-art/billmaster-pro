@@ -54,4 +54,4 @@ document.getElementById('alerts').innerHTML=low.length?low.map(x=>'<div class="i
 document.getElementById('recent').innerHTML=db.orders.slice(0,3).map(o=>'<div class="item between"><div><b>'+esc(o.customer)+'</b><div class="muted">'+esc(o.product)+' · '+o.date+'</div></div><b>'+money(o.total)+'</b></div>').join('')||'<div class="item muted">No activity yet. Record your first order.</div>';
 document.getElementById('shopName').value=p.name||'';document.getElementById('ownerName').value=p.owner||'';document.getElementById('phone').value=p.phone||'';document.getElementById('address').value=p.address||''}
 render();
-</script></body></html>
+</script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="./config.js"></script><script src="./cloud.js"></script></body></html>
