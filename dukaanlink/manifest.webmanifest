@@ -1,13 +1,13 @@
 {
-  "name": "DukaanLink — Shop Manager",
-  "short_name": "DukaanLink",
-  "description": "Manage products, orders, stock and shop finances.",
+  "name": "DUKAAN OS — Business Command Centre",
+  "short_name": "DUKAAN OS",
+  "description": "A practical command centre for products, orders, stock and shop finances. Made by Aalok.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#f4f6fa",
-  "theme_color": "#101827",
+  "background_color": "#f3f5fa",
+  "theme_color": "#10192b",
   "icons": [
     {
       "src": "./icon.svg",
